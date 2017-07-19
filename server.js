@@ -27,58 +27,38 @@ wss.on('connection', function(ws) {
 
 	console.log('user connected');
 
-	// socket to the card table
-	var tableSocket;
+	ws.on('message', function(m){
 
-	realtimeListener.on('connection', function (socket) {
-  
-    // receives a connect message from the card table
-    socket.on("table-connect", function () {
-        // ...  and stores the card table socket
-        tableSocket = socket;
-    });
+		var msg = JSON.parse(m);
+		console.log(msg);
 
-    // receives a throw card message from a phone
-    socket.on('phone-throw-card', function (cardData) {
-        if (tableSocket) {
-            // ... and forwards the data to the card table
-            tableSocket.emit('phone-throw-card', cardData);
-        }
-    });
-});
+		if(msg.type == 'register'){
+			users.push(msg.user);
+			console.log(users);
+		} else if (msg.type == 'loadAll') {
+			msg.users = users;
+		}
 
-	// ws.on('message', function(m){
+		if(msg.sendToAll){
+			//Send to all connections
 
-	// 	var msg = JSON.parse(m);
-	// 	console.log(msg);
+			users.forEach(function(user, index){
+				if(user.id == msg.id && user != msg.user) {
+					user[index] = msg.user;
+				}
+			});
 
-	// 	if(msg.type == 'register'){
-	// 		users.push(msg.user);
-	// 		console.log(users);
-	// 	} else if (msg.type == 'loadAll') {
-	// 		msg.users = users;
-	// 	}
+			connections.forEach(function(connection, index){
+				connection.send(JSON.stringify(msg));
+				console.log("msg sent to client");
+        	});
 
-	// 	if(msg.sendToAll){
-	// 		//Send to all connections
+		} else {
+			//Send back to sender
+			ws.send(JSON.stringify(msg));
+		}
 
-	// 		users.forEach(function(user, index){
-	// 			if(user.id == msg.id && user != msg.user) {
-	// 				user[index] = msg.user;
-	// 			}
-	// 		});
-
-	// 		connections.forEach(function(connection, index){
-	// 			connection.send(JSON.stringify(msg));
-	// 			console.log("msg sent to client");
- //        	});
-
-	// 	} else {
-	// 		//Send back to sender
-	// 		ws.send(JSON.stringify(msg));
-	// 	}
-
-	// });
+	});
 
 
 // ws.on('close', function() {

@@ -2,6 +2,7 @@ window.onload = function() {
 
 	var host = location.origin.replace(/^http/, 'ws');
 	var ws = new WebSocket(host);
+  var socket = null;
     
     // var id;
 
@@ -10,20 +11,22 @@ window.onload = function() {
 
 
     addGlass.swipe() {
-     
+     function throwGlass(cardData) {
+  socket.emit('phone-throw-card', glassData);
+}
     }
 
-    var glass = {
-       shape: 'square',
-       color: 'red',
-       }
-    var msg = {
-       type: 'addGlass',
-       sendToAll: true,
-       glass: glass
-    }
+  //   var glass = {
+  //      shape: 'square',
+  //      color: 'red',
+  //      }
+  //   var msg = {
+  //      type: 'addGlass',
+  //      sendToAll: true,
+  //      glass: glass
+  //   }
 
-     console.log('works 4 me');
+    console.log('works 4 me');
     }
 
     
@@ -31,11 +34,10 @@ window.onload = function() {
 
     console.log(user);
 
-    var msg = {
-      'type': 'loadAll',
-      'sendToAll': false,
-      'user': user
-    }
+        var glass = {
+       shape: 'square',
+       color: 'red',
+       }
 
     ws.send(JSON.stringify(msg));
 
@@ -64,17 +66,16 @@ window.onload = function() {
 
 	}
 
-   $(document).mouseup(function(){
-        console.log('clicked');
+   $(document).swipe(function(){
+        console.log('swipe');
        
         user.color = user.generateColor();
 
-       var msg = {
-           type: 'updateColor',
-           sendToAll: true,
-           user: user
-
-       };
+        var msg = {
+           type: 'addGlass',
+           sendToAll: true,
+           glass: glass
+        }
        
        ws.send(JSON.stringify(msg));
          });  
