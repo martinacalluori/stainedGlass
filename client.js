@@ -11,8 +11,8 @@ window.onload = function() {
 
 
     addGlass.swipe() {
-     function throwGlass(cardData) {
-  socket.emit('phone-throw-card', glassData);
+  //    function throwGlass(glassData) {
+  // socket.emit('phone-throw-glass', glassData);
 }
     }
 
