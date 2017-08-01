@@ -1,6 +1,15 @@
 var WebSocketServer = require("ws").Server;
 var http = require("http");
 var express = require("express");
+var io = require('socket.io')(server);
+
+
+// var app = require('express')();
+// var server = require('http').createServer(app);
+// var io = require('socket.io')(server);
+// var WebSocketServer = require("ws").Server;
+// io.on('connection', function(){ /* … */ });
+// server.listen(3000);
 
 //Set root
 var app = express();
@@ -17,6 +26,8 @@ console.log("http server listen on %d", port);
 var wss = new WebSocketServer({server: server});
 console.log("WebSocket Server was created");
 
+//socket.io
+io.on('connection', function(){ /* … */ });
 
 var connections = [];
 var users = [];
@@ -61,33 +72,32 @@ wss.on('connection', function(ws) {
 	});
 
 
-// ws.on('close', function() {
+ws.on('close', function() {
 
 	
 
-// 	// var time = new Date().toJSON();
+	// var time = new Date().toJSON();
 
-//     var msg = {
-//         type: 'logoff',
-//        	user: users[connections.indexOf(ws)]
+    var msg = {
+        type: 'logoff',
+       	user: users[connections.indexOf(ws)]
 
-//     }
+    }
 
-//     //Search the connections array for the current socket that is closing.
-//     //Use that index to find the user in the users array. 
-//     //This index should be the same because they are both added in the same order.
+    //Search the connections array for the current socket that is closing.
+    //Use that index to find the user in the users array. 
+    //This index should be the same because they are both added in the same order.
 
-//     users.splice(connections.indexOf(ws), 1);
-//     connections.splice(connections.indexOf(ws), 1);
+    // users.splice(connections.indexOf(ws), 1);
+    connections.splice(connections.indexOf(ws), 1);
 
+	connections.forEach(function(connection, index){
+				connection.send(JSON.stringify(msg));
+				console.log("msg sent to client");
+			});
 
-// 	connections.forEach(function(connection, index){
-// 				connection.send(JSON.stringify(msg));
-// 				console.log("msg sent to client");
-// 			});
-
-// 	console.log("user disconnected");
-// })
+	console.log("user disconnected");
+})
 });
 
 console.log("websocket server is up");

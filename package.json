@@ -1,7 +1,7 @@
 {
-  "name": "wk1",
+  "name": "stainedGlass",
   "version": "1.0.0",
-  "description": "basic node.js tutorial",
+  "description": "Interactive Exhibit",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

@@ -1,20 +1,36 @@
+var host = location.origin.replace(/^http/, 'ws');
+  var ws = new WebSocket(host);
+  var socket = null;
+var user = new User();
+  
 window.onload = function() {
 
-	var host = location.origin.replace(/^http/, 'ws');
-	var ws = new WebSocket(host);
-  var socket = null;
-    
-    // var id;
-
-    var user = new User();
     $('.id').html(user.id);
 
 
-    addGlass.swipe() {
-  //    function throwGlass(glassData) {
-  // socket.emit('phone-throw-glass', glassData);
-}
+    if(user.mobile){
+
+      $('body').attr('data-mobile-user', true);
+      $('body').css('background', user.color);
+
     }
+
+   
+
+ // // function to be called to send the glass to the table
+// function throwGlass(glassData) {
+//   socket.emit('phone-throw-glass', glassData);
+// }
+
+
+    // addGlass.swipe() {
+    //  function throwGlass(glassData) {
+    //  socket.emit('phone-throw-glass', glassData);
+
+    //   console.log('works 4 me');
+    // }
+  // };
+
 
   //   var glass = {
   //      shape: 'square',
@@ -26,21 +42,13 @@ window.onload = function() {
   //      glass: glass
   //   }
 
-    console.log('works 4 me');
-    }
+
 
     
 	ws.onopen = function() {
 
     console.log(user);
-
-        var glass = {
-       shape: 'square',
-       color: 'red',
-       }
-
-    ws.send(JSON.stringify(msg));
-
+    //add back load all message and send message in user.js
 
       var msg = {
         'type': 'register',
@@ -74,10 +82,14 @@ window.onload = function() {
         var msg = {
            type: 'addGlass',
            sendToAll: true,
-           glass: glass
-        }
+           
+        };
        
        ws.send(JSON.stringify(msg));
-         });  
+     
+    });  
 }
+
+// var socket = io.connect(YOUR_NODEJS_SERVER_URL);
+             
 
