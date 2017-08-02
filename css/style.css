@@ -3,13 +3,32 @@
 	height: 100px;
 }
 
+.container {
+	box-sizing: border-box;
+	 width: 100%;
+    height: 200px;
+    border: 1px solid blue;
+padding-top: 90px;
+padding-bottom: 100px;
+    text-align: center;
+
+}
+
+.fade-in {
+	animation: growFade 250ms linear;
+}
+.box-display {
+	box-sizing: border-box;
+	width: 100%;
+    height: 200px;
+    border: 1px solid blue;
+	padding-top: 90px;
+}
 
 /*Display */
 .user-view {
 	display:none;
 }
-
-
 
 /*User*/
 [data-mobile-user="true"] .display-view {

@@ -2,12 +2,21 @@ function User() {
   //Random # if under 10,000
   //https://gist.github.com/gordonbrander/2230317
   this.id = Math.random().toString(36).substr(2, 9);
-  // this.color = "#"+Math.floor(Math.random()*16777215).toString(16);
-  this.color = "red";
-  this.shape = "square";
+  this.color = "#"+Math.floor(Math.random()*16777215).toString(16);
+  // this.color = "#EF8354, #DB5461, #00B2CA, #7DCFB6, #1D4E89 ,#8B85C1, #D4CDF4, #7A6F9B, #F7AEF8, #B388EB, #72DDF7, #8093F1";
+  // this.shape = "square, circle, rectangle, diamond";
+
+  // var color = []
+
+var glasses = ['images/glass1.png', 'images/glass2.png', 'images/glass3.png', 'images/glass4.png', 'images/glass5.png', 'images/glass6.png', 'images/glass7.png', 'images/glass8.png', 'images/glass9.png', 'images/glass10.png']; 
+  
+ this.glasses = glasses[Math.floor(Math.random() *glasses.length)];
+
+
   //use math.random to pcik an array
-  this.shape = "square";
+  // this.shape = "square";
   // create an array of colors and shapes
+
   this.mobile = mobilecheck();
 
   this.x = Math.floor(Math.random()*600);
@@ -22,7 +31,6 @@ function User() {
       $('body').css('background', this.color);
 
     }
-
 }
 	
 
@@ -32,6 +40,7 @@ User.prototype.register = function(data){
 }
 
 User.prototype.logoff = function(data){
+	var users = data.users;
 	users.forEach(function(user, index){
 		// if(user.id == data.user.id) {
 		// 	users.splice(index, 1);
@@ -51,14 +60,14 @@ User.prototype.loadAll = function(data){
     });
 }
 
-User.prototype.generateColor = function(data){
-	return "#"+Math.floor(Math.random()*16777215).toString(16);
-	}
+// User.prototype.generateColor = function(data){
+// 	return "#"+Math.floor(Math.random()*16777215).toString(16);
+// 	}
 
-User.prototype.updateColor = function(data){
-	var selector = '#id-' + data.user.id;
-	$(selector).css('background', data.user.color);
-}
+// User.prototype.updateColor = function(data){
+// 	var selector = '#id-' + data.user.id;
+// 	$(selector).css('background', data.user.color);
+// }
 
 // addGlass.swipe() {
 //      function throwGlass(glassData) {
@@ -79,7 +88,8 @@ function addUser(user) {
 
 		//this is what generates html
 
-		$(".display-view").append('<div class="'+user.shape+ ' ' +user.color+'" id="'+user.id+'">'+user.id+'</div>');
+		$('body').append('<img class="fade-in" id="id-' + user.id +'" src="'+ user.glasses +' " alt="Glass Pieces">');
+		// $(".display-view").append('<div class="'+user.shape+ ' ' +user.color+'" id="'+user.id+'">'+user.id+'</div>');
 
 	}
 	

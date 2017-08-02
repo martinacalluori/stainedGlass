@@ -1,6 +1,6 @@
 var host = location.origin.replace(/^http/, 'ws');
-  var ws = new WebSocket(host);
-  var socket = null;
+var ws = new WebSocket(host);
+var socket = null;
 var user = new User();
   
 window.onload = function() {
@@ -11,11 +11,10 @@ window.onload = function() {
     if(user.mobile){
 
       $('body').attr('data-mobile-user', true);
-      $('body').css('background', user.color);
+      // $('body').css('background', user.color);
 
     }
 
-   
 
  // // function to be called to send the glass to the table
 // function throwGlass(glassData) {
