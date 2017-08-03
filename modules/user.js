@@ -4,16 +4,16 @@ function User() {
   this.id = Math.random().toString(36).substr(2, 9);
   this.color = "#"+Math.floor(Math.random()*16777215).toString(16);
   // this.color = "#EF8354, #DB5461, #00B2CA, #7DCFB6, #1D4E89 ,#8B85C1, #D4CDF4, #7A6F9B, #F7AEF8, #B388EB, #72DDF7, #8093F1";
-  // this.shape = "square, circle, rectangle, diamond";
+  // this.shape = "square";
 
   // var color = []
 
-var glasses = ['images/glass1.png', 'images/glass2.png', 'images/glass3.png', 'images/glass4.png', 'images/glass5.png', 'images/glass6.png', 'images/glass7.png', 'images/glass8.png', 'images/glass9.png', 'images/glass10.png']; 
+  var glasses = ['images/glass1.png', 'images/glass2.png', 'images/glass3.png', 'images/glass4.png', 'images/glass5.png', 'images/glass6.png', 'images/glass7.png', 'images/glass8.png', 'images/glass9.png', 'images/glass10.png']; 
   
- this.glasses = glasses[Math.floor(Math.random() *glasses.length)];
+  this.glasses = glasses[Math.floor(Math.random() *glasses.length)];
 
 
-  //use math.random to pcik an array
+  //use math.random to pick an array
   // this.shape = "square";
   // create an array of colors and shapes
 
@@ -88,7 +88,7 @@ function addUser(user) {
 
 		//this is what generates html
 
-		$('body').append('<img class="fade-in" id="id-' + user.id +'" src="'+ user.glasses +' " alt="Glass Pieces">');
+		$('.display-view').append('<img class="fade-in" id="id-' + user.id +'" src="'+ user.glasses +' " alt="Glass Pieces">');
 		// $(".display-view").append('<div class="'+user.shape+ ' ' +user.color+'" id="'+user.id+'">'+user.id+'</div>');
 
 	}

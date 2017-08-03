@@ -10,6 +10,16 @@
            type: 'addGlass',
            sendToAll: true,
            user: user  
+        } else if(direction == 'right') {
+            var msg = {
+           type: 'swapRight',
+           sendToAll: true,
+           user: user  
+        } else if(direction == 'left') {
+            var msg = {
+           type: 'swapLeft',
+           sendToAll: true,
+           user: user  
         };
 
         ws.send(JSON.stringify(msg));
