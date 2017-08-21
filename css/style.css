@@ -38,3 +38,26 @@ padding-bottom: 100px;
 [data-mobile-user="true"] .user-view {
 	display: block;
 }
+
+
+/*Shapes*/
+
+#square {
+	width: 100px;
+	height: 100px;
+	background: this.color;
+}
+#rectangle {
+	width: 200px;
+	height: 100px;
+	background: this.color;
+}
+		
+#rectangleTall {
+	width: 100px;
+	height: 200px;
+	background: this.color;
+}
+
+
+		

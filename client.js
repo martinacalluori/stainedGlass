@@ -3,6 +3,8 @@ var ws = new WebSocket(host);
 var socket = null;
 var user = new User();
   
+
+  // array up here with all colors var colors = []
 window.onload = function() {
 
     $('.id').html(user.id);

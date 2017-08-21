@@ -2,15 +2,26 @@ function User() {
   //Random # if under 10,000
   //https://gist.github.com/gordonbrander/2230317
   this.id = Math.random().toString(36).substr(2, 9);
-  this.color = "#"+Math.floor(Math.random()*16777215).toString(16);
+  // this.color = "#"+Math.floor(Math.random()*16777215).toString(16);
   // this.color = "#EF8354, #DB5461, #00B2CA, #7DCFB6, #1D4E89 ,#8B85C1, #D4CDF4, #7A6F9B, #F7AEF8, #B388EB, #72DDF7, #8093F1";
-  // this.shape = "square";
 
-  // var color = []
+  // user color place, when glass is there, whenever you swipe it changes the place in the array, get users count and use color array in client
 
-  var glasses = ['images/glass1.png', 'images/glass2.png', 'images/glass3.png', 'images/glass4.png', 'images/glass5.png', 'images/glass6.png', 'images/glass7.png', 'images/glass8.png', 'images/glass9.png', 'images/glass10.png']; 
+
+  this.color = ["rgba(213,175,226,0.5)", "rgba(197,235,184,0.5)", "rgba(211,219,254,0.5)", "rgba(253,198,213,0.5)", "rgba(85,190,240,0.5)", "rgba(253,230,159,0.5)", "rgba(125,226,125,0.5)", "rgba(211,102,132,0.5)"];
+
+  var color = [this.color]
+
+  // when glass is on screen get user count and change glass to see what it is
+
+  this.shape = "square, rectangle, rectangleTall";
+
+  var shape = [this.shape];
+
+
+  // var glasses = ['images/glass1.png', 'images/glass2.png', 'images/glass3.png', 'images/glass4.png', 'images/glass5.png', 'images/glass6.png', 'images/glass7.png', 'images/glass8.png', 'images/glass9.png', 'images/glass10.png']; 
   
-  this.glasses = glasses[Math.floor(Math.random() *glasses.length)];
+  // this.glasses = glasses[Math.floor(Math.random() *glasses.length)];
 
 
   //use math.random to pick an array
@@ -28,7 +39,6 @@ function User() {
       if(this.mobile){
 
       $('body').attr('data-mobile-this', true);
-      $('body').css('background', this.color);
 
     }
 }
@@ -60,22 +70,6 @@ User.prototype.loadAll = function(data){
     });
 }
 
-// User.prototype.generateColor = function(data){
-// 	return "#"+Math.floor(Math.random()*16777215).toString(16);
-// 	}
-
-// User.prototype.updateColor = function(data){
-// 	var selector = '#id-' + data.user.id;
-// 	$(selector).css('background', data.user.color);
-// }
-
-// addGlass.swipe() {
-//      function throwGlass(glassData) {
-//      socket.emit('phone-throw-glass', glassData);
-
-//       console.log('works 4 me');
-//     }
-
 User.prototype.addGlass = function(data){
 	console.log("add glass");
 	addUser(data.user);
@@ -88,8 +82,8 @@ function addUser(user) {
 
 		//this is what generates html
 
-		$('.display-view').append('<img class="fade-in" id="id-' + user.id +'" src="'+ user.glasses +' " alt="Glass Pieces">');
-		// $(".display-view").append('<div class="'+user.shape+ ' ' +user.color+'" id="'+user.id+'">'+user.id+'</div>');
+		// $('.display-view').append('<img class="fade-in" id="id-' + user.id +'" src="'+ user.glasses +' " alt="Glass Pieces">');
+		$(".display-view").append('<div class="'+user.shape+ ' ' +user.color+'" id="'+user.id+'">'+user.id+'</div>');
 
 	}
 	
